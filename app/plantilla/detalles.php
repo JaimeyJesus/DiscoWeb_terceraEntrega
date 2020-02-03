@@ -41,7 +41,7 @@ $gestor=opendir($directorio);
     </tr>
     <tr>
     <th scope="row">Plan</th>
-    <td><?=$user->plan?></td>
+    <td><?=PLANES[$user->plan]?></td>
     </tr>
     <tr>
     <th scope="row">Número de ficheros</th>
