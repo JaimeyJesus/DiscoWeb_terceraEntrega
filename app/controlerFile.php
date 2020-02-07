@@ -10,10 +10,14 @@ include_once 'AccesoDatos.php';
 include_once 'plantilla/Usuario.php';
 
 function ctlFileVerFicheros(){
+    if(isset($_SESSION['user'])){
     $usuarios=modeloUserGetAll();
     $userId=$_SESSION['user'];
     $msg="";
     include_once 'plantilla/verFicheros.php';
+    }else{
+        include_once 'plantilla/facceso.php';
+    }
 }
 
 function ctlFileSubirFichero(){
@@ -44,7 +48,9 @@ function ctlFileModificar(){
 }
 
 function ctlFileDescargarFichero(){
-    
+    $archivo=$_GET['fichero'];
+    $userId=$_GET['id'];
+    include_once 'plantilla/descarga.php';
 }
 
 function ctlFileCambiarNombreFichero() {
@@ -84,7 +90,5 @@ function ctlFileBorrarDir($usuarioid){
 }
 
 function ctlFileCompartir(){
-    $archivo=$_GET['fichero'];
-    $userId=$_GET['id'];
-    include_once 'plantilla/descarga.php';
+ 
 }
