@@ -1,0 +1,2 @@
+#Prohibir o deshabilitar por completo el acceso a la carpeta app
+deny from all
