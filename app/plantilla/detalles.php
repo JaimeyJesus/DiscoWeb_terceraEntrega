@@ -1,5 +1,6 @@
 <?php
 include_once "Usuario.php";
+
 ob_start();
 
 ?>
@@ -13,7 +14,7 @@ foreach($usuarios as $clave=>$valor){
   }
 }
 $numeroArchivos=0;
-$espacioTotal=0;
+$espacioOcupado=0;
 $directorio="app/dat/".$_GET['id'];
 if(is_dir($directorio)){
 $gestor=opendir($directorio);
@@ -22,8 +23,9 @@ $gestor=opendir($directorio);
       continue;
   }
   $numeroArchivos++;
-  $espacioTotal +=round((filesize($directorio."/".$archivo)/1024),2);
+  $espacioOcupado +=round((filesize($directorio."/".$archivo)/1024),2);
 }
+  $espacioOcupado = round(($espacioOcupado/ESPACIO_TOTAL)*100);
 }
 ?>
 
@@ -33,33 +35,38 @@ $gestor=opendir($directorio);
 <tbody>
     <tr>
       <th scope="row">Nombre</th>
-    <td><?=$user->nombre?></td>
+      <td><?=$user->nombre?></td>
     </tr>
     <tr> 
-    <th scope="row">Email</th>
-    <td><?=$user->correo?></td>
+      <th scope="row">Email</th>
+      <td><?=$user->correo?></td>
     </tr>
     <tr>
-    <th scope="row">Plan</th>
-    <td><?=PLANES[$user->plan]?></td>
+      <th scope="row">Plan</th>
+      <td><?=PLANES[$user->plan]?></td>
     </tr>
     <tr>
-    <th scope="row">Número de ficheros</th>
-    <td><?=$numeroArchivos?></td>
+      <th scope="row">Número de ficheros</th>
+      <td><?=$numeroArchivos?></td>
     </tr>
     <tr>
-    <th scope="row">Espacio ocupado</th>
-    <td><meter min="0" max="10000" low="5000" high="1000" optimum="0" value="<?=$espacioTotal?>"></meter></td>
-</tr>
-</tbody>
-</table>
-  <div class="row">
-    <div class="col">
+      <th scope="row">Espacio libre</th>
+      <td><?=100 - $espacioOcupado?> %</td>  
+    </tr>
+    <tr> 
+      <th>0 <meter min="0" max=<?=100?> low="50" high="10" optimum="0" value="<?=$espacioOcupado?>"></meter> <?=100?> %</th>
+      <td>
       <form action="index.php" method="POST" id="formularioDetalles">
 	      <input type="submit" name="VerUsuarios" value="Volver">
-      </form>  
-    </div>
-  </div>
+      </form>
+
+      </td>
+    </tr>
+  </th>
+  </tr>
+</tbody>
+</table>
+
 </div>
 
      

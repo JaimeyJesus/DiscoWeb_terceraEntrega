@@ -9,6 +9,8 @@ include_once 'plantilla/Usuario.php';
 include_once 'AccesoDatos.php';
 include_once 'plantilla/Usuario.php';
 
+$espacioOcupado;
+
 function ctlFileVerFicheros(){
     if(isset($_SESSION['user'])){
     $usuarios=modeloUserGetAll();
@@ -20,14 +22,22 @@ function ctlFileVerFicheros(){
     }
 }
 
+function getEspacioOcupado(){
+    $userId=$_SESSION['user'];
+    return modeloFileEspacio($userId);
+}
+
 function ctlFileSubirFichero(){
     $msg="";
     $userId=$_SESSION['user'];
     if(!isset($_FILES['archivo'])){
         include_once 'plantilla/subirFichero.php';
     }else{
-        $archivo = $_FILES['archivo'];
-        if(modeloFileUpFile($archivo,$userId,$msg)){
+        $fichero = $_FILES['archivo'];
+        if(!ctlComprobarEspacio()){
+            $msg .= "El espacio de memoria no es suficiente";
+            include_once 'plantilla/verFicheros.php';
+        }elseif((modeloFileUpFile($fichero,$userId,$msg))&&(ctlComprobarEspacio())){
             include_once 'plantilla/verFicheros.php';
         }else {
             $msg .= "No se ha podido subir el archivo";
@@ -71,6 +81,7 @@ function ctlFileBorrarFichero(){
     $fichero=$_GET['fichero'];
 
     if(modeloFileBorrar($fichero)){
+        $espacioOcupado -= filesize($fichero);
         $msg="La operación se realizó correctamente.";
         include_once 'plantilla/verFicheros.php';
     }else{
@@ -91,4 +102,13 @@ function ctlFileBorrarDir($usuarioid){
 
 function ctlFileCompartir(){
  
+}
+
+function ctlComprobarEspacio(){
+    $espacioOcupado = getEspacioOcupado();
+    $espacioLibre = ESPACIO_TOTAL - $espacioOcupado; 
+    if($espacioLibre < 0){        
+        return false;
+    }
+    return true;
 }

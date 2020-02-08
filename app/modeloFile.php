@@ -63,3 +63,21 @@ function modeloFileCambiarNombre($fichero, $NuevoNombre){
     }
     return false;
 }
+
+function modeloFileEspacio($userId){
+    $espacioOcupado = 0;
+    $directorio="app/dat/".$userId;
+    if(is_dir($directorio)){
+        $gestor=opendir($directorio);
+        while(($archivo=readdir($gestor))!==false){
+            if( $archivo=="." || $archivo==".."){
+                continue;
+            }
+            $espacioFichero = round((filesize($directorio."/".$archivo)/1024),2);
+            
+            $espacioOcupado += $espacioFichero;
+            
+        }
+    }
+    return $espacioOcupado;
+}

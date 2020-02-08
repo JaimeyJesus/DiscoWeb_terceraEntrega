@@ -18,7 +18,7 @@ foreach($usuarios as $usuario){
 <div class="container">
   <h2>Formulario de modificación</h2>
   
-  <form action="index.php?orden=Modificar" method="POST" class="needs-validation" novalidate>
+  <form action="index.php?orden=Modificar" method="POST">
 	<div class="row">
 		<div class="col">
 			<div class="form-group">
@@ -27,8 +27,6 @@ foreach($usuarios as $usuario){
 				value="<?=$user->user?>" readonly>
 			</div>
 		</div>
-	</div>
-	<div class="row">
 		<div class="col">
 			<div class="form-group">
 				<label for="nombre">Nombre:</label>
@@ -46,8 +44,7 @@ foreach($usuarios as $usuario){
 				value="<?=$user->correo?>">
 			</div>
 		</div>
-	</div>
-	<div class="row">
+
 		<div class="col">
 			<div class="form-group">
 				<label for="clave">Contraseña:</label>
