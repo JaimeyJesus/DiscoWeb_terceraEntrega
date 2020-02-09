@@ -13,7 +13,8 @@ define ('GESTIONFICHEROS','2');
 // CONSTANTES PARA FICHEROS
 define('FILEUSER','app/dat/usuarios.json');// Ruta donde se guardan los archivos de los usuarios
 define('RUTA_FICHEROS','/home/alumno/dirpruebas');
-define ('ESPACIO_TOTAL', 10000);//Espacio de memoria para guardar archivos
+define ('LIMITE_TOTAL', 500);//Espacio de memoria para guardar archivos
+define ('LIMITE_FICHERO', 3000);
 
 
 // (0-Básico |1-Profesional |2- Premium| 3- Máster)

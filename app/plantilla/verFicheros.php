@@ -59,7 +59,7 @@ if(is_dir($directorio)){
       $espacioFichero = round((filesize($directorio."/".$archivo)/1024),2);
       $numeroArchivos++;
       $espacioOcupado += $espacioFichero;
-      $espacioLibre = ESPACIO_TOTAL - $espacioOcupado;
+      $espacioLibre = LIMITE_TOTAL - $espacioOcupado;
       ?>
 
         <div class="grid-item" id="nombreFichero"><a class="icono" id="DescargaF" href="#"  title="DESCARGAR" onclick="Descargar('<?=$directorio."','".$archivo."'"?>)"><?= $archivo ?></a></div>

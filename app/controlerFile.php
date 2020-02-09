@@ -13,39 +13,32 @@ $espacioOcupado;
 
 function ctlFileVerFicheros(){
     if(isset($_SESSION['user'])){
-    $usuarios=modeloUserGetAll();
-    $userId=$_SESSION['user'];
-    $msg="";
-    include_once 'plantilla/verFicheros.php';
+        $usuarios=modeloUserGetAll();
+        $userId=$_SESSION['user'];
+        $msg="";
+        include_once 'plantilla/verFicheros.php';
     }else{
         include_once 'plantilla/facceso.php';
     }
 }
 
-function getEspacioOcupado(){
-    $userId=$_SESSION['user'];
-    return modeloFileEspacio($userId);
-}
-
 function ctlFileSubirFichero(){
     $msg="";
+    $fichero = "";
     $userId=$_SESSION['user'];
     if(!isset($_FILES['archivo'])){
         include_once 'plantilla/subirFichero.php';
     }else{
-        $fichero = $_FILES['archivo'];
-        if(!ctlComprobarEspacio()){
-            $msg .= "El espacio de memoria no es suficiente";
-            include_once 'plantilla/verFicheros.php';
-        }elseif((modeloFileUpFile($fichero,$userId,$msg))&&(ctlComprobarEspacio())){
+        $fichero = $_FILES['archivo']; 
+        $tamanioFichero = $_FILES['archivo']['size'];  
+        if(modeloFileUpFile($fichero,$userId,$msg,$tamanioFichero)){
             include_once 'plantilla/verFicheros.php';
         }else {
             $msg .= "No se ha podido subir el archivo";
             include_once 'plantilla/subirFichero.php';
         }
-        
-        
-    }
+    }    
+    
 }
 
 function ctlFileModificar(){
@@ -53,8 +46,7 @@ function ctlFileModificar(){
         $usuarioid=$_SESSION['user'];
         $usuarios = modeloUserGetAll();
         include_once 'plantilla/Modificar.php';
-    }
-    
+    }  
 }
 
 function ctlFileDescargarFichero(){
@@ -81,14 +73,11 @@ function ctlFileBorrarFichero(){
     $fichero=$_GET['fichero'];
 
     if(modeloFileBorrar($fichero)){
-        $espacioOcupado -= filesize($fichero);
         $msg="La operación se realizó correctamente.";
         include_once 'plantilla/verFicheros.php';
     }else{
         $msg="No se pudo relaizar la operación.";
-    }
-    
-    
+    }  
 }
 
 function ctlFileBorrarDir($usuarioid){
@@ -100,15 +89,5 @@ function ctlFileBorrarDir($usuarioid){
     return false;
 }
 
-function ctlFileCompartir(){
- 
-}
+function ctlFileCompartir(){}
 
-function ctlComprobarEspacio(){
-    $espacioOcupado = getEspacioOcupado();
-    $espacioLibre = ESPACIO_TOTAL - $espacioOcupado; 
-    if($espacioLibre < 0){        
-        return false;
-    }
-    return true;
-}

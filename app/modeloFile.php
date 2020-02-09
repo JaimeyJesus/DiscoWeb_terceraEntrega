@@ -1,6 +1,6 @@
 <?php
-
-function modeloFileUpFile($archivo,$userId, &$msg){
+include_once 'config.php';
+function modeloFileUpFile($archivo,$userId, &$msg,$tamanioFichero){
     $resu = true;
     $codigosErrorSubida= [
         0 => 'Subida correcta',
@@ -18,7 +18,16 @@ function modeloFileUpFile($archivo,$userId, &$msg){
         $nombreFichero    = $archivo['name'];
         $temporalFichero  = $archivo['tmp_name'];
         $errorFichero     = $archivo['error'];
-        
+
+        if(!modeloComprobarEspacio($userId,$tamanioFichero)){
+            $msg = "El tamaño del archivo es superior al espacio disponible</br> ";
+            return false;
+        }
+        if($tamanioFichero > LIMITE_FICHERO){
+            $msg = "El tamaño del archivo es mayor de ".round(LIMITE_FICHERO/1024)." Mbs</br>";
+            return false;
+        }
+
         // Obtengo el código de error de la operación, 0 si todo ha ido bien
         if ($errorFichero > 0) {
             $msg .= "Se a producido el error: $errorFichero: "
@@ -49,10 +58,8 @@ function modeloFileBorrar($fichero) {
         return true;
     }else{
         return false;
-    }
-    
+    }  
 }
-
 
 function modeloFileCambiarNombre($fichero, $NuevoNombre){
     if(is_file($fichero)){
@@ -64,7 +71,7 @@ function modeloFileCambiarNombre($fichero, $NuevoNombre){
     return false;
 }
 
-function modeloFileEspacio($userId){
+function modeloEspaciOcupado($userId){
     $espacioOcupado = 0;
     $directorio="app/dat/".$userId;
     if(is_dir($directorio)){
@@ -73,11 +80,18 @@ function modeloFileEspacio($userId){
             if( $archivo=="." || $archivo==".."){
                 continue;
             }
-            $espacioFichero = round((filesize($directorio."/".$archivo)/1024),2);
-            
-            $espacioOcupado += $espacioFichero;
-            
+            $espacioFichero = round((filesize($directorio."/".$archivo)/1024),2);          
+            $espacioOcupado += $espacioFichero;           
         }
     }
     return $espacioOcupado;
+}
+
+function modeloComprobarEspacio($userId,$espacioFichero){ 
+    $espacioOcupado = modeloEspaciOcupado($userId);
+    $espacioLibre = LIMITE_TOTAL - $espacioOcupado; 
+    if($espacioLibre < $espacioFichero){       
+        return false;
+    }
+    return true;
 }
