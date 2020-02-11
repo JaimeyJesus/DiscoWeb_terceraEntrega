@@ -26,8 +26,9 @@ $rutasUser = [
     "Subir Fichero"       => "ctlFileSubirFichero",
     "Borrar Fichero"      => "ctlFileBorrarFichero",
     "Modificar Fichero"   => "ctlFileCambiarNombreFichero",
-    "Descarga"           => "ctlFileDescargarFichero",
+    "Descarga"            => "ctlFileDescargarFichero",
     "Compartir"           => "ctlFileCompartir",
+    "DescargaDirecta"     => "ctlFileDescargaDirecta",
     "Modificar sus datos" => "ctlFileModificar"
 ];
 

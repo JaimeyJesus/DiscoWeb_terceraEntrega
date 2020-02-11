@@ -8,13 +8,16 @@ include_once 'config.php';
 include_once 'plantilla/Usuario.php';
 include_once 'AccesoDatos.php';
 include_once 'plantilla/Usuario.php';
+include_once 'plantilla/Encriptador.php';
+
+
 
 function ctlFileVerFicheros(){
     if(isset($_SESSION['user'])){
-    $usuarios=modeloUserGetAll();
-    $userId=$_SESSION['user'];
-    $msg="";
-    include_once 'plantilla/verFicheros.php';
+        $usuarios=modeloUserGetAll();
+        $userId=$_SESSION['user'];
+        $msg="";
+        include_once 'plantilla/verFicheros.php';
     }else{
         include_once 'plantilla/facceso.php';
     }
@@ -22,20 +25,23 @@ function ctlFileVerFicheros(){
 
 function ctlFileSubirFichero(){
     $msg="";
+    $fichero = "";
     $userId=$_SESSION['user'];
     if(!isset($_FILES['archivo'])){
         include_once 'plantilla/subirFichero.php';
     }else{
-        $archivo = $_FILES['archivo'];
-        if(modeloFileUpFile($archivo,$userId,$msg)){
+        $fichero = $_FILES['archivo']; 
+        $tamanioFichero = $_FILES['archivo']['size']/1024; 
+        
+        if(modeloFileUpFile($fichero,$userId,$msg,$tamanioFichero)){
+            print_r($tamanioFichero);
             include_once 'plantilla/verFicheros.php';
         }else {
             $msg .= "No se ha podido subir el archivo";
             include_once 'plantilla/subirFichero.php';
         }
-        
-        
-    }
+    }    
+    
 }
 
 function ctlFileModificar(){
@@ -43,8 +49,7 @@ function ctlFileModificar(){
         $usuarioid=$_SESSION['user'];
         $usuarios = modeloUserGetAll();
         include_once 'plantilla/Modificar.php';
-    }
-    
+    }  
 }
 
 function ctlFileDescargarFichero(){
@@ -75,9 +80,7 @@ function ctlFileBorrarFichero(){
         include_once 'plantilla/verFicheros.php';
     }else{
         $msg="No se pudo relaizar la operación.";
-    }
-    
-    
+    }  
 }
 
 function ctlFileBorrarDir($usuarioid){
@@ -90,5 +93,42 @@ function ctlFileBorrarDir($usuarioid){
 }
 
 function ctlFileCompartir(){
- 
+    $fichero = $_GET['nombre'];
+    $usuario = $_SESSION['user'];
+    $rutaArchivo= RUTA_FICHEROS.$usuario."/".$fichero;
+    
+    $rutaencriptada = Encriptador::encripta($rutaArchivo);
+    
+    // Genero la ruta de descarga
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        $link = "https";
+        else
+            $link = "http";
+            $link .= "://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+            $link .="?orden=DescargaDirecta&fdirecto=".html_entity_decode($rutaencriptada);
+            echo "<script type='text/javascript'>alert('Fichero $fichero. Enlace de descarga:$link');".
+                "document.location.href='index.php?orden=Mis Archivos';</script>";
+            
+            
+            
 }
+
+function ctlFileDescargaDirecta(){
+    if (!empty($_GET['fdirecto'])) {
+        echo $_GET['fdirecto'];
+        $rutaArchivo = Encriptador::desencripta($_GET['fdirecto']);
+        $pos = strrpos ( $rutaArchivo , "/");
+        $fichero = substr($rutaArchivo,$pos+1);
+        //echo "Se la solicitado descargar ruta: $rutaArchivo fichero: $fichero <br>";
+        procesarDescarga($fichero,$rutaArchivo);
+    }
+}
+
+function procesarDescarga($fichero,$rutaArchivo){
+    header('Content-Type: application/octet-stream');
+   // header("Content-Transfer-Encoding: Binary");
+    header ("Content-Length: ".filesize($rutaArchivo));
+    header("Content-disposition: attachment; filename=$fichero");
+    readfile($rutaArchivo);
+}
+

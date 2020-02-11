@@ -80,12 +80,13 @@ function ctlUserAlta(){
             //si hay datos enviados por post, y no es el boton de vuelta a atras, doy de alta al usuario
           if(!isset($_POST['atras'])){
             $msg            =  "";
+            $idDiv          = "";
             $usuarioid      =  htmlspecialchars($_POST['id']);
             $clave          =  htmlspecialchars($_POST['password']); 
             $passrepetida   =  htmlspecialchars($_POST['password2']);
             $valoresUsuario =  [$clave ,htmlspecialchars($_POST['nombre']),htmlspecialchars($_POST['mail']), htmlspecialchars($_POST['plan']), htmlspecialchars($_POST['estado'])];
             
-            if(modeloUserComprobacionesNuevo($usuarioid, $valoresUsuario, $passrepetida, $msg)) {//comprueba valores introducidos
+            if(modeloUserComprobacionesNuevo($usuarioid, $valoresUsuario, $passrepetida, $msg, $idDiv)) {//comprueba valores introducidos
                 $valoresUsuario[0]=modeloUserCifrar($clave);
                 if(modeloUserNuevo($usuarioid, $valoresUsuario)){
                     $msg="Usuario dado de alta correctamente";
@@ -106,6 +107,7 @@ function ctlUserAlta(){
 //Comprobamos si hay Post, de ser asi modificamos el usuario, y sino mostramos el formulario de modificación
 function ctlUserModificar(){
     $msg="";
+    $idDiv="";
     //si no hay post, se accede a la plantilla
     if(!isset($_POST['nombre'])){
         $usuarioid = $_GET['id'];
@@ -114,7 +116,11 @@ function ctlUserModificar(){
         }else{   
             //si no hay orden atras, se modifica el usuario    
             if(!isset($_POST['Atrás'])){
+                if($_SESSION['modo']!== GESTIONUSUARIOS){
                 $usuarioid       = $_SESSION['user'];
+                }else{
+                    $usuarioid       = $_POST['id'];
+                }
                 $usuarios        = modeloUserGetAll();
                 foreach($usuarios as $usuario){
                     if($usuario->user==$usuarioid){
@@ -124,7 +130,7 @@ function ctlUserModificar(){
                 $clave           = htmlspecialchars($_POST['clave']);
                 $valoresUsuario  = [$clave,htmlspecialchars($_POST['nombre']),htmlspecialchars($_POST['email']), htmlspecialchars($_POST['plan']), htmlspecialchars($_POST['estado'])];
                 
-                if(modeloUserComprobacionesModificar($valoresUsuario, $msg, $user)){
+                if(modeloUserComprobacionesModificar($valoresUsuario, $msg, $user, $idDiv)){
                     if($user->clave!=$valoresUsuario[0]){
                     $valoresUsuario[0]=modeloUserCifrar($clave);//si se modificó la contraseña se cifra, sino ya está cifrada
                     }
@@ -173,13 +179,14 @@ function ctlUserNuevo() {
     if(!isset($_POST['id'])){
         include_once 'plantilla/registro.php';
     }else{
+        $idDiv="";
         $msg            = "";
         $usuarioid      = htmlspecialchars($_POST['id']);
         $passrepetida   = htmlspecialchars($_POST['password2']);
         $clave          = htmlspecialchars($_POST['password']); 
         $valoresUsuario = [$clave,htmlspecialchars($_POST['nombre']),htmlspecialchars($_POST['mail']), htmlspecialchars($_POST['plan']), htmlspecialchars($_POST['estado'])];
         
-        if(modeloUserComprobacionesNuevo($usuarioid, $valoresUsuario, $passrepetida, $msg)) {//comprueba valores introducidos
+        if(modeloUserComprobacionesNuevo($usuarioid, $valoresUsuario, $passrepetida, $msg, $idDiv)) {//comprueba valores introducidos
             $valoresUsuario[0]=modeloUserCifrar($clave);
             //Si no es un administrador el que crea el usuario el estado es Inactivo
             if($_SESSION['modo']!=GESTIONUSUARIOS){
