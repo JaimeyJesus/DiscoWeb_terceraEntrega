@@ -236,12 +236,16 @@ button{
 }
 
 ul{
-	margin-left:10vw;
-	margin-right:10vw;
+	margin-left:5vw;
+	margin-right:5vw;
 }
 
 li{
 	width: 20vw;
+}
+#search{
+	width: 12vw;
+	margin-right: 1vw;
 }
 meter{
 	width:30vw;

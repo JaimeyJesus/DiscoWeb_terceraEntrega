@@ -16,7 +16,14 @@ ob_start();
       <li class="nav-item">
         <a class="nav-link" href="index.php?orden=Cerrar Sesión">Cerrar sesión</a>
       </li>
-
+      <li id="search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-sm w-20" id="textobuscar" type="text" placeholder="Buscar" aria-label="Search">
+      </li>
+      <li>
+        <input type="button" class="btn btn-secondary" id="buscador" value="buscar"/>
+       
+      </li>
     </ul>
   </div>
 </nav>

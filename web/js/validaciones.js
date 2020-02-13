@@ -56,6 +56,17 @@ $(document).ready(inicializarEventos);
         $(this).css("height", "4vh");
     });
 
+    $("#buscador").click(function(){
+      $("div").each(function(){
+      var div = $(this).text();
+      var texto = $("#textobuscar").val();
+        if(div===texto){
+        alert(div);
+        $(this).css('background-color', 'yellow');
+        }
+      });
+    });
+
   }
 
   function opcionDescarga(){
