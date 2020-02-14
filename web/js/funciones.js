@@ -56,6 +56,31 @@ function Atras(){
 function VolverListaUsuarios(){
 	document.location.href="?orden=VerUsuarios";
 }
-
+function buscar(){
+	var texto=document.getElementById("textobuscar").value;
+	var valorDivs=document.getElementsByClassName("identifer");
+	alert(valorDivs[0].innerHTML);
+	for(i=0; i<valorDivs.length;i++){
+		if(valorDivs[i].innerHTML===texto){
+			document.location.href="?orden=Detalles&id="+texto;
+		}
+	}
+	
+}
+function ordenarId(){
+	document.location.href="?orden=VerUsuarios&order=id";
+}
+function ordenarNombre(){
+	document.location.href="?orden=VerUsuarios&order=nombre";
+}
+function ordenarCorreo(){
+	document.location.href="?orden=VerUsuarios&order=correo";
+}
+function ordenarPlan(){
+	document.location.href="?orden=VerUsuarios&order=plan";
+}
+function ordenarEstado(){
+	document.location.href="?orden=VerUsuarios&order=estado";
+}
 
 

@@ -57,7 +57,9 @@ $(document).ready(inicializarEventos);
     });
 
     $("#buscador").click(function(){
-      $("div").each(function(){
+      
+    });
+      /*$("div").each(function(){
       var div = $(this).text();
       var texto = $("#textobuscar").val();
         if(div===texto){
@@ -65,7 +67,7 @@ $(document).ready(inicializarEventos);
         $(this).css('background-color', 'yellow');
         }
       });
-    });
+    });*/
 
   }
 

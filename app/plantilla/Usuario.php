@@ -17,6 +17,7 @@ class Usuario{
         $this->plan=$plan;
         $this->estado=$estado;
     }
+    
 
     public function __get($atributo){
         if(property_exists($this, $atributo)) {

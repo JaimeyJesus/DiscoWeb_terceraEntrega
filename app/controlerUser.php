@@ -51,7 +51,13 @@ function ctlUserCerrar(){
 // Muestro la tabla con los usuario 
 function ctlUserVerUsuarios (){
     // Obtengo los datos del modelo
+    if(!isset($_GET['order'])){
     $usuarios = modeloUserGetAll(); 
+    
+    }else{
+        $usuarios=modeloUserGetAllOrder($_GET['order']);
+
+    }
     include_once 'plantilla/verusuariosp.php';
 }
 

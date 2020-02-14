@@ -55,6 +55,11 @@ function modeloUserGetAll (){
     return $bd->obtenerUsuarios();
 }
 
+function modeloUserGetAllOrder($order){
+    $bd=abrirBD();
+    return $bd->obtenerUsuariosOrder($order);
+}
+
 //Vuelca nuevo usuario en la session
 function modeloUserNuevo($idusuario, $datosuser){
    

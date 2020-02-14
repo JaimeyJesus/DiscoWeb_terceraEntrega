@@ -25,6 +25,11 @@ class AccesoDatos {
         }
         // Construyo las consultas
         $this->consultaUsuarios = $this->dbh->prepare("SELECT * FROM usuarios");
+        $this->consultaUsuariosId = $this->dbh->prepare("SELECT * FROM usuarios ORDER BY user");
+        $this->consultaUsuariosNombre = $this->dbh->prepare("SELECT * FROM usuarios ORDER BY nombre");
+        $this->consultaUsuariosCorreo = $this->dbh->prepare("SELECT * FROM usuarios ORDER BY correo");
+        $this->consultaUsuariosPlan = $this->dbh->prepare("SELECT * FROM usuarios ORDER BY tipo");
+        $this->consultaUsuariosEstado = $this->dbh->prepare("SELECT * FROM usuarios ORDER BY estado");
         $this->consultaUser = $this->dbh->prepare("SELECT user FROM usuarios");
         $this->consultaClave = $this->dbh->prepare("SELECT clave FROM usuarios WHERE user=?;");
         $this->consultaTipo = $this->dbh->prepare("SELECT tipo FROM usuarios WHERE user=?;");
@@ -46,6 +51,48 @@ class AccesoDatos {
                $usuarios[]= $usuario;
             }
         }
+        return $usuarios;
+    }
+
+    public function obtenerUsuariosOrder($order){
+        $usuarios=[];
+        switch($order){
+            case "id": $this->consultaUsuariosId->setFetchMode(PDO::FETCH_CLASS, 'usuarios');
+            if($this->consultaUsuariosId->execute()){
+            while($fila=$this->consultaUsuariosId->fetch()){
+                $usuario = new Usuario($fila['user'],$fila['clave'],$fila['nombre'],$fila['correo'],$fila['tipo'],$fila['estado']);
+               $usuarios[]= $usuario;
+            }
+        }
+        case "nombre": $this->consultaUsuariosNombre->setFetchMode(PDO::FETCH_CLASS, 'usuarios');
+            if($this->consultaUsuariosNombre->execute()){
+            while($fila=$this->consultaUsuariosNombre->fetch()){
+                $usuario = new Usuario($fila['user'],$fila['clave'],$fila['nombre'],$fila['correo'],$fila['tipo'],$fila['estado']);
+               $usuarios[]= $usuario;
+            }
+        }
+        case "correo": $this->consultaUsuariosCorreo->setFetchMode(PDO::FETCH_CLASS, 'usuarios');
+            if($this->consultaUsuariosCorreo->execute()){
+            while($fila=$this->consultaUsuariosCorreo->fetch()){
+                $usuario = new Usuario($fila['user'],$fila['clave'],$fila['nombre'],$fila['correo'],$fila['tipo'],$fila['estado']);
+               $usuarios[]= $usuario;
+            }
+        }
+        case "estado": $this->consultaUsuariosEstado->setFetchMode(PDO::FETCH_CLASS, 'usuarios');
+            if($this->consultaUsuariosEstado->execute()){
+            while($fila=$this->consultaUsuariosEstado->fetch()){
+                $usuario = new Usuario($fila['user'],$fila['clave'],$fila['nombre'],$fila['correo'],$fila['tipo'],$fila['estado']);
+               $usuarios[]= $usuario;
+            }
+        }
+        case "plan": $this->consultaUsuariosPlan->setFetchMode(PDO::FETCH_CLASS, 'usuarios');
+            if($this->consultaUsuariosPlan->execute()){
+            while($fila=$this->consultaUsuariosPlan->fetch()){
+                $usuario = new Usuario($fila['user'],$fila['clave'],$fila['nombre'],$fila['correo'],$fila['tipo'],$fila['estado']);
+               $usuarios[]= $usuario;
+            }
+        }
+    }
         return $usuarios;
     }
 

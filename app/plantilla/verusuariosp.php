@@ -21,7 +21,7 @@ ob_start();
         <input class="form-control form-control-sm w-20" id="textobuscar" type="text" placeholder="Buscar" aria-label="Search">
       </li>
       <li>
-        <input type="button" class="btn btn-secondary" id="buscador" value="buscar"/>
+        <input type="button" class="btn btn-secondary" id="buscador" onclick="buscar()"value="buscar"/>
        
       </li>
     </ul>
@@ -31,11 +31,11 @@ ob_start();
  
 
 <div class="grid-cabecera-usuarios">
-    <div class="grid-item-cabecera" id="CabId"><b>ID</b></div>
-    <div class="grid-item-cabecera" id="CabNombre"><b>NOMBRE</b></div>
-    <div class="grid-item-cabecera" id="CabCorreo"><b>CORREO</b></div>
-    <div class="grid-item-cabecera" id="CabPlan"><b>PLAN</b></div>
-    <div class="grid-item-cabecera" id="CabEstado"><b>ESTADO</b></div>
+    <a href="#" onclick="ordenarId()"><div class="grid-item-cabecera" id="CabId"><b>ID</b></div></a>
+    <a href="#" onclick="ordenarNombre()"><div class="grid-item-cabecera" id="CabNombre"><b>NOMBRE</b></div></a>
+    <a href="#" onclick="ordenarCorreo()"><div class="grid-item-cabecera" id="CabCorreo"><b>CORREO</b></div></a>
+    <a href="#" onclick="ordenarPlan()"><div class="grid-item-cabecera" id="CabPlan"><b>PLAN</b></div></a>
+    <a href="#" onclick="ordenarEstado()"><div class="grid-item-cabecera" id="CabEstado"><b>ESTADO</b></div></a>
     <div class="grid-item-cabecera" id="CabBorrar"><b>OPERACIONES</b></div>
     <!-- <div class="grid-item-cabecera" id="CabModificar"><b>MODIFICAR</b></div> -->
     <!-- <div class="grid-item-cabecera" id="CabDetalles"><b>DETALLES</b></div> -->
@@ -45,7 +45,7 @@ ob_start();
     ?>
 <div class="container-usuarios">
     <?php for ($i=0;$i<count($usuarios);$i++){ ?>    		
-    	<div class="grid-item" id="identificador"><?= $usuarios[$i]->user ?></div>
+    	<div class="grid-item identifer" id="identificador" name="identifer"><?= $usuarios[$i]->user ?></div>
       <div class="grid-item" ><?=$usuarios[$i]->nombre ?></div>
       <div class="grid-item" id='Correo' ><?=$usuarios[$i]->correo ?></div>
       <div class="grid-item" id='plan'><?=PLANES[$usuarios[$i]->plan] ?></div>
