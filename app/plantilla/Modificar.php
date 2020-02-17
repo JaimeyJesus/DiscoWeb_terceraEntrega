@@ -76,10 +76,10 @@ foreach($usuarios as $usuario){
 			<div class="form-group">
 			<label for="plan">Plan:</label>
 			<select name="plan" class="form-control" >
-    			<option value="0" <?=(PLANES[$user->plan]=='Básico')?'selected':''?>>Básico</option>
-    			<option value="1" <?=(PLANES[$user->plan]=='Profesional')?'selected':''?>>Profesional</option>
-    			<option value="2" <?=(PLANES[$user->plan]=='Premium')?'selected':''?>>Premium</option>
-    			<option value="3" <?=(PLANES[$user->plan]=='Máster')?'selected':''?>>Máster</option>
+    			<option value="0" <?=(PLANES[$user->tipo]=='Básico')?'selected':''?>>Básico</option>
+    			<option value="1" <?=(PLANES[$user->tipo]=='Profesional')?'selected':''?>>Profesional</option>
+    			<option value="2" <?=(PLANES[$user->tipo]=='Premium')?'selected':''?>>Premium</option>
+    			<option value="3" <?=(PLANES[$user->tipo]=='Máster')?'selected':''?>>Máster</option>
 			</select>
 			</div>
 		</div>

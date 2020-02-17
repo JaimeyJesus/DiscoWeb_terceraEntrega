@@ -5,10 +5,11 @@ class Usuario{
     public $clave;
     public $nombre;
     public $correo;
+    public $tipo;
     public $estado;
-    public $plan;
 
-    function __construct(String $user,String $clave,String $nombre,String $correo,String $plan,String $estado)
+
+    /*function __construct(String $user,String $clave,String $nombre,String $correo,String $plan,String $estado)
     {
         $this->user=$user;
         $this->clave=$clave;
@@ -17,7 +18,8 @@ class Usuario{
         $this->plan=$plan;
         $this->estado=$estado;
     }
-    
+    */
+   
 
     public function __get($atributo){
         if(property_exists($this, $atributo)) {

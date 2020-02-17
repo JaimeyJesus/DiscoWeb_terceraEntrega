@@ -44,20 +44,20 @@ ob_start();
     $auto = $_SERVER['PHP_SELF'];    
     ?>
 <div class="container-usuarios">
-    <?php for ($i=0;$i<count($usuarios);$i++){ ?>    		
-    	<div class="grid-item identifer" id="identificador" name="identifer"><?= $usuarios[$i]->user ?></div>
-      <div class="grid-item" ><?=$usuarios[$i]->nombre ?></div>
-      <div class="grid-item" id='Correo' ><?=$usuarios[$i]->correo ?></div>
-      <div class="grid-item" id='plan'><?=PLANES[$usuarios[$i]->plan] ?></div>
-      <div class="grid-item" id='Estado'><?=ESTADOS[$usuarios[$i]->estado] ?></div>
+    <?php foreach ($usuarios as $usuario){ ?>    		
+    	<div class="grid-item identifer" id="identificador" name="identifer"><?= $usuario->user ?></div>
+      <div class="grid-item" ><?=$usuario->nombre ?></div>
+      <div class="grid-item" id='Correo' ><?=$usuario->correo ?></div>
+      <div class="grid-item" id='plan'><?=PLANES[$usuario->tipo] ?></div>
+      <div class="grid-item" id='Estado'><?=ESTADOS[$usuario->estado] ?></div>
       <div class="grid-item"><a href="#"
-		  onclick="confirmarBorrar('<?=$usuarios[$i]->nombre?>','<?=$usuarios[$i]->user?>')">
+		  onclick="confirmarBorrar('<?=$usuario->nombre?>','<?=$usuario->user?>')">
 		  <img class="icono" title="borrar" src="web/img/papelera.png"></a>
 	    </div>
-      <div class="grid-item"><a href="<?= $auto?>?orden=Modificar&id=<?= $usuarios[$i]->user ?>">
+      <div class="grid-item"><a href="<?= $auto?>?orden=Modificar&id=<?= $usuario->user ?>">
     	<img class="icono" title="modificar" src="web/img/editar.png"></a>
 	    </div>
-      <div class="grid-item"><a href="<?= $auto?>?orden=Detalles&id=<?= $usuarios[$i]->user ?>">
+      <div class="grid-item"><a href="<?= $auto?>?orden=Detalles&id=<?= $usuario->user ?>">
     	<img class="icono" title="detalles" src="web/img/ojo.png"></a>
 	    </div>
 

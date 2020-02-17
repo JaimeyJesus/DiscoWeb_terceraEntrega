@@ -68,7 +68,7 @@ function buscar(){
 	
 }
 function ordenarId(){
-	document.location.href="?orden=VerUsuarios&order=id";
+	document.location.href="?orden=VerUsuarios&order=user";
 }
 function ordenarNombre(){
 	document.location.href="?orden=VerUsuarios&order=nombre";
@@ -77,7 +77,7 @@ function ordenarCorreo(){
 	document.location.href="?orden=VerUsuarios&order=correo";
 }
 function ordenarPlan(){
-	document.location.href="?orden=VerUsuarios&order=plan";
+	document.location.href="?orden=VerUsuarios&order=tipo";
 }
 function ordenarEstado(){
 	document.location.href="?orden=VerUsuarios&order=estado";

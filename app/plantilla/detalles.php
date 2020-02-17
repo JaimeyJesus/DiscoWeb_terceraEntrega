@@ -39,7 +39,7 @@ if(is_dir($directorio)){
       </tr>
       <tr>
         <th scope="row">Plan</th>
-        <td><?=PLANES[$user->plan]?></td>
+        <td><?=PLANES[$user->tipo]?></td>
       </tr>
       <tr>
         <th scope="row">Número de ficheros</th>

@@ -1,7 +1,7 @@
 <?php
 // DATOS DE CONEXION
-define ('DBSERVER','localhost');
-define ('DBNAME','usuarios' );
+define ('DBSERVER','192.168.105.85');
+define ('DBNAME','usuario' );
 define ('DBUSER','root');
 define ('DBPASSWORD','root');
 

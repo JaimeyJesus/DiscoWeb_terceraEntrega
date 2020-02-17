@@ -142,7 +142,7 @@ function ctlUserModificar(){
                     }
                     //si no es administrador compruebo si ha cambiado el plan y de ser asi, le dejo incativo para que sea el administrador quien de el visto bueno al cambio;
                     if($_SESSION['modo']!=GESTIONUSUARIOS){
-                        if($valoresUsuario[3]!=$user->plan){
+                        if($valoresUsuario[3]!=$user->tipo){
                             $valoresUsuario[4]="B";
                         }
                         if($valoresUsuario[4]!=$user->estado){
