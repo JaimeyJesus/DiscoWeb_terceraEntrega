@@ -67,20 +67,42 @@ function buscar(){
 	}
 	
 }
-function ordenarId(){
-	document.location.href="?orden=VerUsuarios&order=user";
+function ordenarId(contador){
+	
+	if(contador%2==0){
+		document.location.href="?orden=VerUsuarios&order=user&contador=1";
+	}else{
+		document.location.href="?orden=VerUsuarios&order=user&contador=2";
+	}
+
 }
-function ordenarNombre(){
-	document.location.href="?orden=VerUsuarios&order=nombre";
+function ordenarNombre(contador){
+	if(contador%2==0){
+	document.location.href="?orden=VerUsuarios&order=nombre&contador=1";
+	}else{
+		document.location.href="?orden=VerUsuarios&order=nombre&contador=2";
+	}
 }
-function ordenarCorreo(){
-	document.location.href="?orden=VerUsuarios&order=correo";
+function ordenarCorreo(contador){
+	if(contador%2==0){
+	document.location.href="?orden=VerUsuarios&order=correo&contador=1";
+	}else{
+		document.location.href="?orden=VerUsuarios&order=correo&contador=2";
+	}
 }
-function ordenarPlan(){
-	document.location.href="?orden=VerUsuarios&order=tipo";
+function ordenarPlan(contador){
+	if(contador%2==0){
+	document.location.href="?orden=VerUsuarios&order=tipo&contador=1";
+	}else{
+		document.location.href="?orden=VerUsuarios&order=tipo&contador=2";
+	}
 }
-function ordenarEstado(){
-	document.location.href="?orden=VerUsuarios&order=estado";
+function ordenarEstado(contador){
+	if(contador%2==0){
+	document.location.href="?orden=VerUsuarios&order=estado&contador=1";
+	}else{
+		document.location.href="?orden=VerUsuarios&order=estado&contador=2";	
+	}
 }
 
 

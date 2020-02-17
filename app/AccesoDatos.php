@@ -51,13 +51,17 @@ class AccesoDatos {
     public function obtenerUsuariosOrder($order){
         $usuarios=[];
         $usuarios=AccesoDatos::obtenerUsuarios();
-        usort($usuarios, AccesoDatos::object_sorter($order));
+        if($_GET['contador']%2==0){
+        usort($usuarios, AccesoDatos::object_sorter($order,"ASC"));
+        }else{
+            usort($usuarios, AccesoDatos::object_sorter($order, 'DESC'));
+        }
         return $usuarios;
         
     }
-     public function object_sorter($clave,$orden=null) {
+     public function object_sorter($clave,$orden) {
         return function ($a, $b) use ($clave,$orden) {
-            $result=  ($orden=="DESC") ? strnatcmp($b->$clave, $a->$clave) :  strnatcmp($a->$clave, $b->$clave);
+            $result=  ($orden=="DESC") ? strcasecmp($b->$clave, $a->$clave) :  strcasecmp($a->$clave, $b->$clave);
             return $result;
         };
     }

@@ -291,3 +291,9 @@ span{
 	border-left: 2px solid #666666;
 	text-decoration: none;
  }
+ #icono-down, #icono-up{
+	 background-color:#206C66;
+ }
+ #iconoupid{
+	display:none;
+ }
