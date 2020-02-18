@@ -28,7 +28,9 @@ function ctlFileSubirFichero(){
     $fichero = "";
     $userId=$_SESSION['user'];
     if(!isset($_FILES['archivo'])){
+        $msg="prueba";
         include_once 'plantilla/subirFichero.php';
+
     }else{
         $fichero = $_FILES['archivo']; 
         $tamanioFichero = $_FILES['archivo']['size']/1024; 
@@ -40,7 +42,8 @@ function ctlFileSubirFichero(){
             $msg .= "No se ha podido subir el archivo";
             include_once 'plantilla/subirFichero.php';
         }
-    }    
+    } 
+
     
 }
 

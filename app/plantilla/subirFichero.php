@@ -20,7 +20,7 @@ ob_start();
   <form name="f1" enctype="multipart/form-data" action="index.php?orden=Subir Fichero" method="post" class="needs-validation">
 	  <div class="row">
       <div class="col-6">
-        <input type="hidden" name="MAX_FILE_SIZE" value="199999990" />
+        
       </div>
     </div>
 

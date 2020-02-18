@@ -2,6 +2,13 @@
 include_once 'config.php';
 function modeloFileUpFile($archivo,$userId, &$msg,$tamanioFichero){
     $resu = true;
+    $total;
+    switch($_SESSION['tipouser']){
+        case 0: $total=LIMITE_TOTAL_BASICO;break;
+        case 1: $total=LIMITE_TOTAL_PROFESIONAL;break;
+        case 2: $total=LIMITE_TOTAL_PREMIUM;break;
+        case 3: $total=LIMITE_TOTAL_MASTER;break;
+    }
     $codigosErrorSubida= [
         0 => 'Subida correcta',
         1 => 'El tamaño del archivo excede el admitido por el servidor',  // directiva upload_max_filesize en php.ini
@@ -14,6 +21,7 @@ function modeloFileUpFile($archivo,$userId, &$msg,$tamanioFichero){
     ];
     $msg = '';
     print_r($tamanioFichero);
+    sleep(5);
 
         $directorioSubida = "app/dat/".$userId; 
         $nombreFichero    = $archivo['name'];
@@ -24,7 +32,7 @@ function modeloFileUpFile($archivo,$userId, &$msg,$tamanioFichero){
             $msg = "El tamaño del archivo es mayor de ".round(LIMITE_FICHERO/1024)." Mbs";
             return false;
         }else{
-        if(!modeloComprobarEspacio($userId,$tamanioFichero)){
+        if(!modeloComprobarEspacio($userId,$tamanioFichero, $total)){
             $msg = "El tamaño del archivo es superior al espacio disponible";
             return false;
         }
@@ -90,9 +98,9 @@ function modeloEspaciOcupado($userId){
     return $espacioOcupado;
 }
 
-function modeloComprobarEspacio($userId,$espacioFichero){ 
-    $espacioOcupado = modeloEspaciOcupado($userId)*1024;
-    $espacioLibre = LIMITE_TOTAL - $espacioOcupado; 
+function modeloComprobarEspacio($userId,$espacioFichero, $total){ 
+    $espacioOcupado = modeloEspaciOcupado($userId);
+    $espacioLibre = $total - $espacioOcupado; 
     if($espacioLibre < $espacioFichero){       
         return false;
     }

@@ -3,6 +3,15 @@
 // No se envia al navegador
 ob_start();
 ?>
+<?php 
+$total;
+switch($_SESSION['tipouser']){
+    case 0: $total=LIMITE_TOTAL_BASICO;break;
+    case 1: $total=LIMITE_TOTAL_PROFESIONAL;break;
+    case 2: $total=LIMITE_TOTAL_PREMIUM;break;
+    case 3: $total=LIMITE_TOTAL_MASTER;break;
+}
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
@@ -59,7 +68,7 @@ if(is_dir($directorio)){
       $espacioFichero = round((filesize($directorio."/".$archivo)/1024),2);
       $numeroArchivos++;
       $espacioOcupado += $espacioFichero;
-      $espacioLibre = LIMITE_TOTAL - $espacioOcupado;
+      $espacioLibre = $total - $espacioOcupado;
       ?>
 
         <div class="grid-item" id="nombreFichero"><a class="icono" id="DescargaF" href="#"  title="DESCARGAR" onclick="Descargar('<?=$directorio."','".$archivo."'"?>)"><?= $archivo ?></a></div>
