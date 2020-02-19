@@ -1,5 +1,13 @@
 
-
+  $(document).ready(function () {
+    var NombresValidos = [];
+    $(".identifer").each(function () {
+      NombresValidos.push($(this).text());
+    });
+    $("#textobuscar").autocomplete({
+      source: NombresValidos
+    });
+  });
 
 $(document).ready(inicializarEventos);  
 
@@ -12,6 +20,7 @@ $(document).ready(inicializarEventos);
           .html(inputFile.files[0].name);
     });  
     //
+
 
     if ($(window).width() < 600) {
       cambiarMenu();
