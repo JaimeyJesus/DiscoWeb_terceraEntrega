@@ -39,10 +39,10 @@ $cont=0;
 
 <div class="grid-cabecera-usuarios">
     <a href="#" id="user" onclick="ordenarId('<?=$contador?>')"><div class="grid-item-cabecera" id="CabId"><b>ID</b><span class="badge ml-5"><img src="iconos/arrow-up-down.svg"></span></div></a>
-    <a href="#" id="nombre" onclick="ordenarNombre('<?=$contador?>')"><div class="grid-item-cabecera" id="CabNombre"><b>NOMBRE</b><span class="badge ml-5"><img src="iconos/arrow-up-down.svg"></span></div></a>
-    <a href="#" id="correo" onclick="ordenarCorreo('<?=$contador?>')"><div class="grid-item-cabecera" id="CabCorreo"><b>CORREO</b><span class="badge ml-5"><img src="iconos/arrow-up-down.svg"></span></div></a>
-    <a href="#" id="plan" onclick="ordenarPlan('<?=$contador?>')"><div class="grid-item-cabecera" id="CabPlan"><b>PLAN</b><span class="badge ml-4"><img src="iconos/arrow-up-down.svg"></span></div></a>
-    <a href="#" id="estado" onclick="ordenarEstado('<?=$contador?>')"><div class="grid-item-cabecera" id="CabEstado"><b>ESTADO</b><span class="badge ml-2"><img src="iconos/arrow-up-down.svg"></span></div></a>
+    <a href="#" id="nombre" onclick="ordenarNombre('<?=$contador?>')"><div class="grid-item-cabecera" id="CabNombre"><b>NOMBRE</b><span class="badge ml-3"><img src="iconos/arrow-up-down.svg"></span></div></a>
+    <a href="#" id="correo" onclick="ordenarCorreo('<?=$contador?>')"><div class="grid-item-cabecera" id="CabCorreo"><b>CORREO</b><span class="badge ml-3"><img src="iconos/arrow-up-down.svg"></span></div></a>
+    <a href="#" id="plan" onclick="ordenarPlan('<?=$contador?>')"><div class="grid-item-cabecera" id="CabPlan"><b>PLAN</b><span class="badge ml-2"><img src="iconos/arrow-up-down.svg"></span></div></a>
+    <a href="#" id="estado" onclick="ordenarEstado('<?=$contador?>')"><div class="grid-item-cabecera" id="CabEstado"><b>ESTADO</b><span class="badge ml-1"><img src="iconos/arrow-up-down.svg"></span></div></a>
     <div class="grid-item-cabecera" id="CabBorrar"><b>OPERACIONES</b></div>
     <!-- <div class="grid-item-cabecera" id="CabModificar"><b>MODIFICAR</b></div> -->
     <!-- <div class="grid-item-cabecera" id="CabDetalles"><b>DETALLES</b></div> -->

@@ -1,6 +1,13 @@
 <?php 
 include_once "Usuario.php";
 ob_start();
+$total;
+switch($_SESSION['tipouser']){
+    case 0: $total=LIMITE_TOTAL_BASICO;break;
+    case 1: $total=LIMITE_TOTAL_PROFESIONAL;break;
+    case 2: $total=LIMITE_TOTAL_PREMIUM;break;
+    case 3: $total=LIMITE_TOTAL_MASTER;break;
+}
 
 $auto = $_SERVER['PHP_SELF'];
 foreach($usuarios as $clave=>$valor){
@@ -21,7 +28,7 @@ if(is_dir($directorio)){
     $numeroArchivos++;
     $espacioOcupado +=round((filesize($directorio."/".$archivo)/1024),2);
   }
-    $espacioOcupado = round(($espacioOcupado/LIMITE_TOTAL)*100);
+    $espacioOcupado = round(($espacioOcupado/$total)*100);
 }
 ?>
 

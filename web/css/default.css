@@ -122,7 +122,7 @@ textarea {
 	position: fixed;
 	height:4vh;
   	display: grid;
-  	grid-template-columns: 12vw 15vw 17vw 10vw 10vw 24vw ;
+  	grid-template-columns: 12vw 15vw 15vw 10vw 12vw 24vw ;
   	background-color: #5E9C97;
 	  padding-top: .5vw;
 	  font-family: 'Rubik', sans-serif;
@@ -142,7 +142,7 @@ textarea {
 	overflow: auto;
 	height:55vh;
   	display: grid;
-  	grid-template-columns: 12vw 15vw 17vw 10vw 10vw 7.5vw 7.5vw 7.5vw;
+  	grid-template-columns: 12vw 15vw 15vw 10vw 12vw 7.5vw 7.5vw 7.5vw;
   	background-color: #5E9C97;
 	border: #000 solid 1px;
 	margin-top: 10vh;

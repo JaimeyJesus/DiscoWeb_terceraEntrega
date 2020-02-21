@@ -59,7 +59,7 @@ function VolverListaUsuarios(){
 function buscar(){
 	var texto=document.getElementById("textobuscar").value;
 	var valorDivs=document.getElementsByClassName("identifer");
-	alert(valorDivs[0].innerHTML);
+	
 	for(i=0; i<valorDivs.length;i++){
 		if(valorDivs[i].innerHTML===texto){
 			document.location.href="?orden=Detalles&id="+texto;
