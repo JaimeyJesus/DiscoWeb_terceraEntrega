@@ -11,7 +11,6 @@ include_once 'plantilla/Usuario.php';
 include_once 'plantilla/Encriptador.php';
 
 
-
 function ctlFileVerFicheros(){
     if(isset($_SESSION['user'])){
         $usuarios=modeloUserGetAll();
@@ -28,7 +27,7 @@ function ctlFileSubirFichero(){
     $fichero = "";
     $userId=$_SESSION['user'];
     if(!isset($_FILES['archivo'])){
-        $msg="prueba";
+        $msg="";
         include_once 'plantilla/subirFichero.php';
 
     }else{
@@ -98,7 +97,7 @@ function ctlFileBorrarDir($usuarioid){
 function ctlFileCompartir(){
     $fichero = $_GET['nombre'];
     $usuario = $_SESSION['user'];
-    $rutaArchivo= RUTA_FICHEROS.$usuario."/".$fichero;
+    $rutaArchivo= "app/dat/".$usuario."/".$fichero;
     
     $rutaencriptada = Encriptador::encripta($rutaArchivo);
     
@@ -109,7 +108,7 @@ function ctlFileCompartir(){
             $link = "http";
             $link .= "://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
             $link .="?orden=DescargaDirecta&fdirecto=".html_entity_decode($rutaencriptada);
-            echo "<script type='text/javascript'>alert('Fichero $fichero. Enlace de descarga:$link');".
+            echo "<script type='text/javascript'>alert('$rutaArchivo.Fichero $fichero. Enlace de descarga:$link');".
                 "document.location.href='index.php?orden=Mis Archivos';</script>";
             
             
@@ -118,10 +117,10 @@ function ctlFileCompartir(){
 
 function ctlFileDescargaDirecta(){
     if (!empty($_GET['fdirecto'])) {
-        echo $_GET['fdirecto'];
+        
         $rutaArchivo = Encriptador::desencripta($_GET['fdirecto']);
         $pos = strrpos ( $rutaArchivo , "/");
-        $fichero = substr($rutaArchivo,$pos+1);
+        $fichero = substr($rutaArchivo,$pos);
         //echo "Se la solicitado descargar ruta: $rutaArchivo fichero: $fichero <br>";
         procesarDescarga($fichero,$rutaArchivo);
     }
@@ -131,7 +130,7 @@ function procesarDescarga($fichero,$rutaArchivo){
     header('Content-Type: application/octet-stream');
    // header("Content-Transfer-Encoding: Binary");
     header ("Content-Length: ".filesize($rutaArchivo));
-    header("Content-disposition: attachment; filename=$fichero");
+    header("Content-disposition: attachment; filename=".$fichero);
     readfile($rutaArchivo);
 }
 

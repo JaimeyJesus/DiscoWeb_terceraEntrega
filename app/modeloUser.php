@@ -26,8 +26,6 @@ function modeloOkUser($user,$password){
 
     $bd=abrirBD();
     $consultaClave=$bd->obtenerClave($user);
-   
-    if(password_verify($password,$consultaClave)){echo "true";}else{echo "false";}
     
     if(Cifrador::verificar($password,$consultaClave)){return true;}return false;  
 }
