@@ -119,7 +119,8 @@ function ctlUserModificar(){
         $usuarioid = $_GET['id'];
         $usuarios  = modeloUserGetAll();
         include_once 'plantilla/Modificar.php';
-        }else{   
+        }else{ 
+              
             //si no hay orden atras, se modifica el usuario    
             if(!isset($_POST['Atrás'])){
                 if($_SESSION['modo']!== GESTIONUSUARIOS){
@@ -141,11 +142,11 @@ function ctlUserModificar(){
                     $valoresUsuario[0]=modeloUserCifrar($clave);//si se modificó la contraseña se cifra, sino ya está cifrada
                     }
                     //si no es administrador compruebo si ha cambiado el plan y de ser asi, le dejo incativo para que sea el administrador quien de el visto bueno al cambio;
-                    if($_SESSION['modo']!=GESTIONUSUARIOS){
-                        if($valoresUsuario[3]!=$user->tipo){
+                    if($_SESSION['modo']!==GESTIONUSUARIOS){
+                        if($valoresUsuario[3]!==$user->tipo){
                             $valoresUsuario[4]="B";
                         }
-                        if($valoresUsuario[4]!=$user->estado){
+                        if($valoresUsuario[4]!==$user->estado){
                             $valoresUsuario[4]=$user->estado;
                         }
                     }

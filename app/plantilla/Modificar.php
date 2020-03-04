@@ -98,8 +98,7 @@ foreach($usuarios as $usuario){
 
 	<div class="row">
 		<div class="col">
-    		<button type="submit" class="btn btn-primary" name="Modificar" id="Modificar" value="Modificar"
-			onclick="confirmarModificar('<?=$user->nombre?>','<?=$user->user?>')">Modificar</button>
+    		<button type="submit" class="btn btn-primary" name="Modificar" id="Modificar" value="Modificar">Modificar</button> 
 		</div>	
 		<div class="col">
 			<input type="cancel"<?php 

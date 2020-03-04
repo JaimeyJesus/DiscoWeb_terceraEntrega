@@ -3,7 +3,7 @@
 define ('DBSERVER','localhost');
 define ('DBNAME','usuarios' );
 define ('DBUSER','root');
-define ('DBPASSWORD','');
+define ('DBPASSWORD','root');
 
 
 define ('GESTIONUSUARIOS','1');
